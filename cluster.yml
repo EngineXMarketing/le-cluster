@@ -1,0 +1,30 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: le-production-5
+  region: us-east-1
+
+nodeGroups:
+  - name: ng-1-workers
+    labels: { role: workers }
+    instanceType: t3a.small
+    desiredCapacity: 1
+    privateNetworking: true
+
+vpc:
+  id: vpc-612ae818
+  subnets:
+    private:
+      us-east-1a: { id: subnet-aefa2b82 }
+      us-east-1b: { id: subnet-33ae237b }
+      us-east-1c: { id: subnet-b8559ae2 }
+      us-east-1d: { id: subnet-d53301b0 }
+      us-east-1f: { id: subnet-a87113a4 }
+  clusterEndpoints:
+    publicAccess: true
+    privateAccess: true
+
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["*"]
